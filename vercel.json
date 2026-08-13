@@ -2,7 +2,7 @@
   "services": {
     "frontend": {
       "root": "frontend/",
-      "buildCommand": "vite build",
+      "buildCommand": "npm run build",
       "outputDirectory": "dist"
     },
     "backend": {
@@ -21,15 +21,6 @@
       "source": "/(.*)",
       "destination": {
         "service": "frontend"
-      }
-    }
-  ],
-  "builds": [
-    {
-      "src": "frontend/**",
-      "use": "@vercel/static-build",
-      "config": {
-        "buildCommand": "npm run build"
       }
     }
   ]
