@@ -59,7 +59,9 @@ export const PlaylistPage: React.FC = () => {
         {songs.map((song, index) => (
           <div
             key={song.id}
-            ref={(el) => (songRefs.current[index] = el)}
+            ref={(el) => {
+              songRefs.current[index] = el;
+            }}
             className={styles.songCard}
           >
             <div className={styles.songInfo}>
