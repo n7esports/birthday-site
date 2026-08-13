@@ -1,0 +1,73 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - VITE_API_URL=http://localhost:8000
+    depends_on:
+      - backend
+    networks:
+      - birthday-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+    environment:
+      - DATABASE_URL=postgresql://postgres:password@db:5432/birthday
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - db
+      - redis
+    networks:
+      - birthday-network
+
+  db:
+    image: postgres:15-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=birthday
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - birthday-network
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    networks:
+      - birthday-network
+
+  wasm-builder:
+    build:
+      context: ./rust-wasm
+      dockerfile: Dockerfile
+    volumes:
+      - ./rust-wasm:/app
+      - ./frontend/src/wasm:/output
+    networks:
+      - birthday-network
+
+volumes:
+  postgres_data:
+
+networks:
+  birthday-network:
+    driver: bridge

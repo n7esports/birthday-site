@@ -1,0 +1,28 @@
+[package]
+name = "birthday-wasm"
+version = "1.0.0"
+edition = "2021"
+authors = ["Birthday Project"]
+description = "WASM modules for birthday website"
+license = "MIT"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+wasm-bindgen = "0.2.88"
+js-sys = "0.3.65"
+serde = { version = "1.0.193", features = ["derive"] }
+serde_json = "1.0.108"
+rand = "0.8.5"
+console_error_panic_hook = "0.1.7"
+
+[profile.release]
+opt-level = "z"
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true
+
+[features]
+default = ["console_error_panic_hook"]
