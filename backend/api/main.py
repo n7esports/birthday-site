@@ -1,7 +1,12 @@
+# @ts-ignore
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
+# @ts-ignore
 from fastapi.middleware.cors import CORSMiddleware
+# @ts-ignore
 from fastapi.responses import JSONResponse
+# @ts-ignore
 import asyncio
+# @ts-ignore
 from typing import List, Dict
 
 app = FastAPI(
