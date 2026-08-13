@@ -67,7 +67,9 @@ export const GuestbookPage: React.FC = () => {
             {messages.map((msg, index) => (
               <div
                 key={msg.id}
-                ref={(el) => (messagesRef.current[index] = el)}
+                ref={(el) => {
+                  messagesRef.current[index] = el;
+                }}
                 className={styles.messageCard}
               >
                 <div className={styles.messageHeader}>
