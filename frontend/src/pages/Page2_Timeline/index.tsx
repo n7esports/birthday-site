@@ -59,7 +59,9 @@ export const TimelinePage: React.FC = () => {
         {events.map((event, index) => (
           <div
             key={event.year}
-            ref={(el) => (itemsRef.current[index] = el)}
+            ref={(el) => {
+              itemsRef.current[index] = el;
+            }}
             className={`${styles.event} ${index % 2 === 0 ? styles.left : styles.right}`}
           >
             <div className={styles.icon}>{event.icon}</div>
