@@ -8,11 +8,6 @@ build/
 .vscode/
 .idea/
 .DS_Store
-*.wasm
-*.d.ts
-*.js.map
-*.min.js
-*.css.map
 __pycache__/
 *.pyc
 *.pyo
@@ -22,3 +17,8 @@ __pycache__/
 *.egg
 *.egg-info/
 target/
+*.wasm
+*.d.ts
+*.js.map
+*.min.js
+*.css.map
