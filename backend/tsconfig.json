@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "checkJs": false,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "allowJs": true
+  },
+  "exclude": ["**/*"]
+}
