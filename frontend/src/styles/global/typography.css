@@ -1,0 +1,40 @@
+@font-face {
+  font-family: 'Great Vibes';
+  src: url('/fonts/display/GreatVibes.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/body/Inter.woff2') format('woff2');
+  font-weight: 300 700;
+  font-display: swap;
+}
+
+:root {
+  --font-display: 'Great Vibes', cursive;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  font-weight: 400;
+}
+
+body,
+p,
+span,
+div,
+button,
+input,
+textarea,
+select {
+  font-family: var(--font-body);
+}

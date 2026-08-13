@@ -1,0 +1,107 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background: #1a1a2e;
+}
+
+.canvasContainer {
+  width: 100%;
+  height: 100%;
+}
+
+.controls {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(26, 26, 46, 0.95);
+  backdrop-filter: blur(20px);
+  padding: 1.5rem 2rem;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 300px;
+  max-width: 500px;
+  width: 90%;
+}
+
+.controlsTitle {
+  font-family: 'Great Vibes', cursive;
+  color: #ffffff;
+  text-align: center;
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.controlGroup {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+}
+
+.controlGroup label {
+  min-width: 70px;
+  font-weight: 600;
+}
+
+.controlGroup input[type="range"] {
+  flex: 1;
+  -webkit-appearance: none;
+  background: transparent;
+}
+
+.controlGroup input[type="range"]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+}
+
+.controlGroup input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #764ba2;
+  margin-top: -6px;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(118, 75, 162, 0.5);
+}
+
+.controlGroup input[type="color"] {
+  width: 40px;
+  height: 40px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  cursor: pointer;
+  background: transparent;
+  padding: 2px;
+}
+
+.controlGroup span {
+  min-width: 30px;
+  text-align: center;
+  font-weight: 600;
+  color: #764ba2;
+}
+
+@media (max-width: 768px) {
+  .controls {
+    padding: 1rem;
+    min-width: 0;
+    width: 95%;
+    bottom: 1rem;
+  }
+  
+  .controlsTitle {
+    font-size: 1.2rem;
+  }
+}
