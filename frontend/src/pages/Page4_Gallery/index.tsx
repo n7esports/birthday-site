@@ -83,7 +83,9 @@ export const GalleryPage: React.FC = () => {
         {photos.map((photo, index) => (
           <div
             key={photo.id}
-            ref={(el) => (itemsRef.current[index] = el)}
+            ref={(el) => {
+              itemsRef.current[index] = el;
+            }}
             className={styles.card}
             onClick={() => handlePhotoClick(photo)}
           >
