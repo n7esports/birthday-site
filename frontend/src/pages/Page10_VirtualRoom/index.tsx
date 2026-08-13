@@ -11,7 +11,7 @@ interface User {
 }
 
 export const VirtualRoomPage: React.FC = () => {
-  const [users, setUsers] = useState<User[]>([
+  const [users] = useState<User[]>([
     { id: 1, name: 'You', x: 400, y: 300, emoji: '🦸' },
     { id: 2, name: 'Alice', x: 200, y: 200, emoji: '👩' },
     { id: 3, name: 'Bob', x: 600, y: 400, emoji: '👨' },
@@ -35,27 +35,23 @@ export const VirtualRoomPage: React.FC = () => {
       if (rect) {
         canvas.width = rect.width;
         canvas.height = rect.height;
-        // Update user positions proportionally
-        setUsers(prev => prev.map(u => ({
-          ...u,
-          x: (u.x / 800) * rect.width,
-          y: (u.y / 600) * rect.height,
-        })));
       }
     };
 
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    // GSAP float animation
+    // GSAP float animation - using refs directly
     const tl = gsap.timeline({
       defaults: { duration: 2, ease: 'sine.inOut' },
       repeat: -1,
       yoyo: true,
     });
 
-    users.forEach((user, index) => {
-      tl.to(`.avatar-${user.id}`, {
+    // Use a different approach for floating
+    const floatElements = document.querySelectorAll('.floating-avatar');
+    floatElements.forEach((el, index) => {
+      tl.to(el, {
         y: -20 + (index * 5),
         duration: 2 + index * 0.3,
       }, 0);
@@ -100,12 +96,6 @@ export const VirtualRoomPage: React.FC = () => {
       const isYou = user.id === 1;
       const x = user.x + (isYou ? (mousePos.x - user.x) * 0.05 : 0);
       const y = user.y + (isYou ? (mousePos.y - user.y) * 0.05 : 0);
-
-      // Update user position if it's "You"
-      if (isYou) {
-        user.x = x;
-        user.y = y;
-      }
 
       // Draw glow
       const gradient = ctx.createRadialGradient(x, y - 10, 10, x, y - 10, 50);
