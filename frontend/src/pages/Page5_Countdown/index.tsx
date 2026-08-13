@@ -56,13 +56,18 @@ export const CountdownPage: React.FC = () => {
 
     // Initial animation
     const tl = gsap.timeline();
-    tl.fromTo(
-      containerRef.current,
-      { opacity: 0, y: 50 },
-      { opacity: 1, y: 0, duration: 1, ease: 'power3.out' }
-    );
+    if (containerRef.current) {
+      tl.fromTo(
+        containerRef.current,
+        { opacity: 0, y: 50 },
+        { opacity: 1, y: 0, duration: 1, ease: 'power3.out' }
+      );
+    }
 
-    return () => clearInterval(timer);
+    return () => {
+      clearInterval(timer);
+      tl.kill();
+    };
   }, []);
 
   useEffect(() => {
@@ -82,6 +87,8 @@ export const CountdownPage: React.FC = () => {
           );
         }
       });
+
+      return () => tl.kill();
     }
   }, [timeLeft]);
 
@@ -90,25 +97,33 @@ export const CountdownPage: React.FC = () => {
       <h1 className={styles.title}>Countdown to the Big Day</h1>
       <div className={styles.flipClock}>
         <div className={styles.flipUnit}>
-          <div ref={(el) => (flipRefs.current[0] = el)} className={styles.flipCard}>
+          <div ref={(el) => {
+            flipRefs.current[0] = el;
+          }} className={styles.flipCard}>
             <span className={styles.flipNumber}>{String(timeLeft.days).padStart(2, '0')}</span>
           </div>
           <span className={styles.flipLabel}>Days</span>
         </div>
         <div className={styles.flipUnit}>
-          <div ref={(el) => (flipRefs.current[1] = el)} className={styles.flipCard}>
+          <div ref={(el) => {
+            flipRefs.current[1] = el;
+          }} className={styles.flipCard}>
             <span className={styles.flipNumber}>{String(timeLeft.hours).padStart(2, '0')}</span>
           </div>
           <span className={styles.flipLabel}>Hours</span>
         </div>
         <div className={styles.flipUnit}>
-          <div ref={(el) => (flipRefs.current[2] = el)} className={styles.flipCard}>
+          <div ref={(el) => {
+            flipRefs.current[2] = el;
+          }} className={styles.flipCard}>
             <span className={styles.flipNumber}>{String(timeLeft.minutes).padStart(2, '0')}</span>
           </div>
           <span className={styles.flipLabel}>Minutes</span>
         </div>
         <div className={styles.flipUnit}>
-          <div ref={(el) => (flipRefs.current[3] = el)} className={styles.flipCard}>
+          <div ref={(el) => {
+            flipRefs.current[3] = el;
+          }} className={styles.flipCard}>
             <span className={styles.flipNumber}>{String(timeLeft.seconds).padStart(2, '0')}</span>
           </div>
           <span className={styles.flipLabel}>Seconds</span>
