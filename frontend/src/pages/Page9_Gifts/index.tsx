@@ -89,7 +89,9 @@ export const GiftsPage: React.FC = () => {
         {gifts.map((gift, index) => (
           <div
             key={gift.id}
-            ref={(el) => (cardRefs.current[index] = el)}
+            ref={(el) => {
+              cardRefs.current[index] = el;
+            }}
             className={`${styles.giftCard} ${gift.claimed ? styles.claimed : ''}`}
           >
             <div className={styles.giftEmoji}>{gift.emoji}</div>
